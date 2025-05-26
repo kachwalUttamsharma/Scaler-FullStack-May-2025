@@ -5,3 +5,4 @@
     3. Emmet
     4. Live Server Extension for previewing html
     5. Live Preview - preview html in VS Code
+    6. Portfolio Project - https://kachwaluttamsharma.github.io/portfolioProject/
