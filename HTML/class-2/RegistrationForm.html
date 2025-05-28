@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+  </head>
+  <!-- type: text, number, range, date, email, password, file, checkbox, radio -->
+  <!-- textarea -->
+  <!-- select -->
+  <!-- label - input = for-id (should be same) -->
+  <!-- name-value = (this are key value pairs those are collected when users enter data and submit) -->
+  <body>
+    <h2>Registration Form</h2>
+    <!-- form - wrapper  -->
+    <!-- input -->
+    <form action="" method="get">
+      <!-- Name -->
+      <div>
+        <label for="username">Name: </label>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          id="username"
+          name="username"
+        />
+      </div>
+      <!-- Email -->
+      <div>
+        <label for="useremail">Email: </label>
+        <input
+          type="email"
+          placeholder="Enter Email"
+          id="useremail"
+          name="email"
+        />
+      </div>
+      <!-- Password -->
+      <div>
+        <label for="userpassword">Password: </label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          id="userpassword"
+          name="password"
+        />
+      </div>
+      <!-- Age -->
+      <div>
+        <label for="userage">Age: </label>
+        <input type="number" placeholder="Enter Age" id="userage" name="age" />
+      </div>
+      <!-- Gender -->
+      <div>
+        <label>Gender: </label>
+        <div>
+          <label for="male">Male</label>
+          <input type="radio" id="male" name="gender" value="Male" />
+          <label for="female">Female</label>
+          <input type="radio" id="female" name="gender" value="Female" />
+          <label for="others">Others</label>
+          <input type="radio" id="others" name="gender" value="Others" />
+        </div>
+      </div>
+      <!-- DOB -->
+      <div>
+        <label for="dob">Date of birth:</label>
+        <input
+          type="date"
+          placeholder="Enter DOB"
+          id="dob"
+          min="2025-05-25"
+          max="2025-05-28"
+          name="dob"
+        />
+      </div>
+      <!-- Degree -->
+      <div>
+        <label for="degree">Degree: </label>
+        <select name="degree" id="degree">
+          <option value="btech">BTech</option>
+          <option value="bsc">BSC</option>
+          <option value="msc">MSC</option>
+          <option value="mba">MBA</option>
+          <option value="mtech">MTech</option>
+        </select>
+      </div>
+      <!-- Address -->
+      <div>
+        <label for="address">Address: </label>
+        <textarea rows="3" cols="20" id="address" name="address"></textarea>
+      </div>
+      <!-- Photo -->
+      <div>
+        <label for="userproficepicture">Upload Profic Picture</label>
+        <input type="file" id="userproficepicture" name="profilepicture" />
+      </div>
+      <div>
+        <input type="checkbox" id="rememberme" name="acknowledge" />
+        <label for="rememberme">Acknowledge Above Infomation</label>
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+  </body>
+</html>

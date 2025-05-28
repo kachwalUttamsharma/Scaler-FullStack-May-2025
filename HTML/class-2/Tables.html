@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables</title>
+  </head>
+  <body>
+    <!-- table - warapper -->
+    <!-- table heading wrapper - thead -->
+    <!-- table heading for each cell (column) - th -->
+    <!-- table row - tr -->
+    <!-- table data - td -->
+    <!-- tbody - wrapper for content -->
+    <!-- tfoor - wrapper for foot -->
+    <!-- caption - whole table caption (heading) -->
+    <!-- Colspan - value which defines amount of columns
+    it need to cover or spread across -->
+    <!-- rowspan - value which defines amount of rows
+    it need to cover or spread across -->
+    <table border>
+      <caption>
+        <b>Students Scores Information</b>
+      </caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>PSP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="3">Deepali</td>
+          <td>DSA</td>
+          <td>80%</td>
+        </tr>
+        <tr>
+          <!-- <td>Deepali</td> -->
+          <td>LLD</td>
+          <td>90%</td>
+        </tr>
+        <tr>
+          <!-- <td>Deepali</td> -->
+          <td>Computer Fundamentals</td>
+          <td>93%</td>
+        </tr>
+        <tr>
+          <td>Prabhu</td>
+          <td>LLD</td>
+          <td>94%</td>
+        </tr>
+        <tr>
+          <td>Srivastava</td>
+          <td>DSA</td>
+          <td>88%</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">Total Average PSP</td>
+          <td>78.2%</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>
