@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* div>p {
+        color: blue;
+      } */
+      /* .c2 {
+        color: blue;
+      } */
+
+      /* descendent selector (space between 2 selectors) */
+      /* .c1 .c2 {
+        color: blue;
+      } */
+
+      /* div > .c2 {
+        color: blue;
+      } */
+
+      /* .c1 > p {
+        color: blue;
+      } */
+
+      .c1 > .c2 {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- select "I'm the direct son" and make it blue  -->
+    <div class="c1">
+      <p class="c2">I'm the direct son</p>
+    </div>
+
+    <div class="c1">
+      <span>
+        <p>I'm the indirect son</p>
+      </span>
+    </div>
+  </body>
+</html>

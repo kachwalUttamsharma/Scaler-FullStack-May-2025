@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Attribute Selector */
+      /* input[value="Select me"] {
+        background-color: blue;
+      } */
+
+      input[data-testId="1"] {
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- mark background as blue -->
+    <form>
+      <input type="button" value="Click Me" />
+      <input type="button" value="Select me" data-testId="1" />
+    </form>
+  </body>
+</html>
