@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Units</title>
+    <style>
+      html {
+        font-size: 10px;
+      }
+      /* pixels */
+      .px-example {
+        width: 200px;
+        height: 200px;
+        background-color: tomato;
+      }
+
+      /* relative unit % */
+      .percentage-example {
+        background-color: rgb(155, 191, 191);
+        width: 200px;
+      }
+
+      .children-percentage-example {
+        background-color: steelblue;
+        width: 50%;
+      }
+
+      .viewport-example {
+        width: 50vw;
+        height: 50vh;
+        background-color: darkgoldenrod;
+      }
+
+      .rem-example {
+        width: 50rem;
+        height: 5rem;
+        background-color: brown;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="px-example">pixel example</div>
+    <div class="percentage-example">
+      <div class="children-percentage-example">children percentage</div>
+    </div>
+    <div class="viewport-example">Viewport Example</div>
+    <div class="rem-example">REM Example</div>
+  </body>
+</html>
