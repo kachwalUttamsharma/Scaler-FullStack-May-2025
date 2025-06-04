@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+
+      .flex-container {
+        background-color: tomato;
+        border: 2px solid black;
+        /* margin: 10px; */
+        height: 1500px;
+        width: auto;
+        display: flex;
+        /* it defines flex-items direction
+        which is directly proportional 
+        to main-axis */
+        flex-direction: row;
+        /*this property is applied to main-axis
+        to move elements */
+        /* helps you to move content along main-axis */
+        justify-content: center;
+        /*this property is applied to cross-axis
+        to move elements along cross-axis */
+        align-items: center;
+        /* it helps to wrap elements asAdd commentMore actions
+        per width available 
+        (reference screen width)*/
+        flex-wrap: wrap;
+
+        /* flex-flow: flex-direction flex-wrap */
+        /* flex-flow: row wrap; */
+
+        /* it works same as align -item but use this 
+        only if you want to user space values*/
+        /* align-content: center; */
+
+        /* gap: 25px 10px; */
+        row-gap: 25px;
+        column-gap: 10px;
+      }
+
+      .flex-item {
+        height: 50px;
+        width: 50px;
+        background-color: dodgerblue;
+        margin: 10px;
+      }
+
+      /* order is helpful in order re-arrange the order in 
+      which elements are rendered*/
+      /* flex grow is used when we want items to grow with ratio
+      when width of screen increases*/
+      /* flex shrink is used when we want items to shrink
+      when width of screen decreases*/
+      /* flex basis is used when have to fix width or height wrt to 
+      flex-direction particular size of items*/
+      .item1 {
+        order: 2;
+        flex-grow: 2;
+        /* it overrides the property align items */
+        align-self: flex-start;
+      }
+
+      .item3 {
+        order: 5;
+        flex-grow: 3;
+        align-self: flex-end;
+      }
+
+      /* 4 */
+      /* (4:1) (5:1) (1:2) (2:4) (3:5) */
+      .item2 {
+        order: 4;
+        flex-shrink: 2;
+        flex-basis: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="flex-item item1">1</div>
+      <div class="flex-item item2">2</div>
+      <div class="flex-item item3">3</div>
+      <div class="flex-item item4">4</div>
+      <div class="flex-item item5">5</div>
+    </div>
+  </body>
+</html>

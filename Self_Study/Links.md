@@ -19,3 +19,7 @@
 
 1. [BackGround Properties](https://web.dev/learn/css/backgrounds)
 2. [Selectos](https://web.dev/learn/css/selectors)
+
+### class 5
+
+1. [flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
