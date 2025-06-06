@@ -23,3 +23,8 @@
 ### class 5
 
 1. [flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+
+### class 6
+
+1. [grid](https://css-tricks.com/snippets/css/complete-guide-grid/#prop-justify-items)
+2. [flex froggy](https://flexboxfroggy.com/)
