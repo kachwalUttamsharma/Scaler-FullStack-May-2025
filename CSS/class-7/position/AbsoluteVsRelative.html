@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Position</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      div {
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+      }
+
+      p {
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+      }
+
+      #target_parent {
+        position: relative;
+      }
+
+      /* default value for position property is static */
+      #target {
+        background-color: thistle;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus,
+        inventore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. In corrupti
+        laudantium praesentium excepturi, voluptatibus minus quisquam aut
+        quaerat fugit atque?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam vero
+        neque perspiciatis sequi blanditiis expedita ut temporibus a architecto
+        esse qui reiciendis aliquid tempore officiis, ad voluptatibus doloribus
+        quas fuga?
+      </p>
+
+      <div id="target_parent">
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus,
+          inventore.
+        </p>
+        <p id="target">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. In corrupti
+          laudantium praesentium excepturi, voluptatibus minus quisquam aut
+          quaerat fugit atque?
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam vero
+          neque perspiciatis sequi blanditiis expedita ut temporibus a
+          architecto esse qui reiciendis aliquid tempore officiis, ad
+          voluptatibus doloribus quas fuga?
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

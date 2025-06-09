@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #top {
+        /* not-inheritable */
+        display: flex;
+        border: 2px solid gray;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 5px;
+
+        /* inheritable */
+        color: red;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        line-height: 12px;
+        text-align: right;
+      }
+
+      .child {
+        display: initial;
+        color: inherit;
+        border: inherit;
+        padding: inherit;
+        border-radius: inherit;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top">
+      <div class="child">
+        <h1>1</h1>
+        <h1>2</h1>
+        <h1>3</h1>
+      </div>
+      <div class="child">
+        <h1>1</h1>
+        <h1>2</h1>
+        <h1>3</h1>
+      </div>
+    </div>
+  </body>
+</html>

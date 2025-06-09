@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*(1,1,2) > (1,0,2) > (1,0,0) > (0,1,0) */
+      #fruit {
+        color: red;
+      }
+      .favourite {
+        color: green;
+      }
+
+      /* (1,1,2) */
+      ul#fruits li.favourite {
+        color: blue;
+      }
+
+      /* (1,0,2) */
+      ul#fruits li {
+        color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="fruits">
+      <li>Apple</li>
+      <li id="fruit" class="favourite">Mango</li>
+      <li>Orange</li>
+    </ul>
+    <ul>
+      <li>eat</li>
+      <li>sleep</li>
+      <li>repeat</li>
+    </ul>
+  </body>
+</html>
