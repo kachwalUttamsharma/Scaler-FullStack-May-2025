@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .content {
+        background-color: thistle;
+      }
+
+      .visible {
+        display: none;
+      }
+
+      .highlight {
+        font-weight: bolder;
+        color: steelblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myDiv" class="content visible">Hello, world</div>
+
+    <script>
+      // add a class highlight
+      // remove class visible
+      // check if content class exist
+      const div = document.querySelector("div");
+      div.classList.remove("visible");
+      div.classList.add("highlight");
+
+      if (div.classList.contains("content")) {
+        console.log("the div has content class");
+      } else {
+        console.log("the div doesnt have content class");
+      }
+    </script>
+  </body>
+</html>
