@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanban Board</title>
+    <script
+      src="https://kit.fontawesome.com/589957875e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="toolbox-cont">
+      <div class="toolbox-priority-cont">
+        <div class="pink color"></div>
+        <div class="green color"></div>
+        <div class="blue color"></div>
+        <div class="purple color"></div>
+      </div>
+      <h1 class="toolbox-header">KanBan Board</h1>
+      <div class="action-btn-cont">
+        <div class="add-btn">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="remove-btn">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-cont">
+      <div class="ticket-cont">
+        <div class="ticket-color"></div>
+        <div class="ticket-id">lorem</div>
+        <div class="ticket-area">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+          repellendus eos ipsa, nostrum neque debitis repudiandae molestias
+          beatae facilis voluptatum.
+        </div>
+        <div class="ticket-lock">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+      </div>
+    </main>
+
+    <dialog class="modal-cont">
+      <textarea
+        class="modal-cont_textarea"
+        placeholder="Enter Your Task"
+      ></textarea>
+      <div class="priority-color-cont">
+        <div class="priority-color pink"></div>
+        <div class="priority-color blue active"></div>
+        <div class="priority-color green"></div>
+        <div class="priority-color purple"></div>
+      </div>
+    </dialog>
+  </body>
+</html>
