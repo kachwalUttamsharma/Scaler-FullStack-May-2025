@@ -124,14 +124,20 @@ body {
   font-size: 1rem;
 }
 
+.delete-task {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 2.3rem;
+  font-size: 1rem;
+}
+
 .modal-cont {
-  display: block;
   box-shadow: 10px 10px 40px -4px rgba(0, 0, 0, 0.75);
   height: 50vh;
   width: 50vw;
   top: 25vh;
   border-radius: var(--containerRadius);
-  display: flex;
+  display: none;
 }
 
 .modal-cont_textarea {
