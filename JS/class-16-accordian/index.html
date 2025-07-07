@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanban Board</title>
+    <script
+      src="https://kit.fontawesome.com/589957875e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"
+      defer
+    ></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <header class="toolbox-cont">
+      <div class="toolbox-priority-cont">
+        <div class="pink color"></div>
+        <div class="green color"></div>
+        <div class="blue color"></div>
+        <div class="purple color"></div>
+      </div>
+      <h1 class="toolbox-header">KanBan Board</h1>
+      <div class="action-btn-cont">
+        <div class="add-btn">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="remove-btn">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-cont"></main>
+
+    <div class="accordian">
+      <div class="ticket-color pink accordian-header">
+        <i class="fa-solid fa-caret-down accordian-dropdown"></i>
+        <span style="margin: 4px">Ticket Id: 23627t</span>
+      </div>
+      <div class="accordian-body">
+        <div class="ticket-id">TicketId : ${ticketId}</div>
+        <div class="ticket-area">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam
+          magnam at aliquid? Voluptatum voluptatem quisquam consectetur velit
+          magnam labore reiciendis quasi doloribus unde, quis suscipit omnis
+          vero aperiam eaque eum soluta ut sequi esse asperiores nobis itaque
+          consequuntur dolores? Debitis repellendus voluptatibus quaerat libero
+          necessitatibus, sint alias ut vel exercitationem!
+        </div>
+        <button class="delete-task" disabled="true">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+        <button class="ticket-lock">
+          <i class="fa-solid fa-lock"></i>
+        </button>
+      </div>
+    </div>
+
+    <dialog class="modal-cont">
+      <textarea
+        class="modal-cont_textarea"
+        placeholder="Enter Your Task"
+      ></textarea>
+      <div class="priority-color-cont">
+        <div class="priority-color pink active"></div>
+        <div class="priority-color green"></div>
+        <div class="priority-color blue"></div>
+        <div class="priority-color purple"></div>
+      </div>
+    </dialog>
+  </body>
+</html>
