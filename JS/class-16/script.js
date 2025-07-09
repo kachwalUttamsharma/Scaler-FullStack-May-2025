@@ -5,6 +5,17 @@ const mainCont = document.querySelector(".main-cont");
 const allPriorityColors = document.querySelectorAll(".priority-color");
 const removeBtn = document.querySelector(".remove-btn");
 const toolBoxColors = document.querySelectorAll(".color");
+const pendingContainer = document.querySelector(".pending-cont");
+const finishedContainer = document.querySelector(".finished-cont");
+
+let allTickets = [];
+
+window.addEventListener("load", () => {
+  const tasks = JSON.parse(localStorage.getItem("kanbanboardTask"));
+  tasks.forEach((ticket) =>
+    createTicket(ticket.content, ticket.color, ticket.id, ticket.isPending)
+  );
+});
 
 toolBoxColors.forEach((colorElem) => {
   colorElem.addEventListener("click", () => {
@@ -82,20 +93,21 @@ modalCont.addEventListener("keydown", (event) => {
   const key = event.key;
   if (key === "Shift") {
     const taskInfo = textArea.value;
-    createTicket(taskInfo, modalPriorityColor);
+    const ticketId = shortid();
+    createTicket(taskInfo, modalPriorityColor, ticketId);
     modalCont.style.display = "none";
     textArea.value = "";
   }
 });
 
-function createTicket(taskInfo, taskColorPrority) {
-  const ticketId = shortid();
+function createTicket(taskInfo, taskColorPrority, ticketId, isPending = true) {
   const ticketCont = document.createElement("div");
   ticketCont.setAttribute("class", "ticket-cont");
+  ticketCont.setAttribute("draggable", "true");
   ticketCont.innerHTML = `<div class="${taskColorPrority} ticket-color"></div>
-        <div class="ticket-id">TicketId : ${ticketId}</div>
+        <div class="ticket-id">${ticketId}</div>
         <div class="ticket-area">
-          TaskInfo: ${taskInfo}
+          ${taskInfo}
         </div>
         <button class="delete-task" disabled=true>
          <i class="fa-solid fa-circle-xmark"></i>
@@ -104,22 +116,38 @@ function createTicket(taskInfo, taskColorPrority) {
           <i class="fa-solid fa-lock"></i>
         </button>
   `;
-  mainCont.appendChild(ticketCont);
-  handleDelete(ticketCont);
-  handleLock(ticketCont);
-  handleColor(ticketCont);
+  if (isPending) {
+    pendingContainer.appendChild(ticketCont);
+  } else {
+    finishedContainer.appendChild(ticketCont);
+  }
+  handleDelete(ticketCont, ticketId);
+  handleLock(ticketCont, ticketId);
+  handleColor(ticketCont, ticketId);
+  const ticketObj = {
+    id: ticketId,
+    content: taskInfo,
+    color: taskColorPrority,
+    isPending: isPending,
+  };
+  allTickets.push(ticketObj);
+  updateLocalStorage();
 }
 
-function handleDelete(ticket) {
+function handleDelete(ticket, ticketId) {
   const deleteTask = ticket.querySelector(".delete-task");
   deleteTask.addEventListener("click", () => {
     if (isDeleteTaskButtonOn) {
-      container.remove();
+      ticket.remove();
+      allTickets = allTickets.filter((ticketObj) => {
+        return ticketObj.id !== ticketId;
+      });
+      updateLocalStorage();
     }
   });
 }
 
-function handleLock(ticket) {
+function handleLock(ticket, ticketId) {
   const ticketLock = ticket.querySelector(".ticket-lock");
   const ticketLockIcon = ticketLock.children[0];
   const ticketArea = ticket.querySelector(".ticket-area");
@@ -139,10 +167,15 @@ function handleLock(ticket) {
       ticketArea.setAttribute("contenteditable", "false");
       ticketArea.style.cssText = "";
     }
+    const ticketObj = allTickets.find((ticketObj) => {
+      return ticketObj.id === ticketId;
+    });
+    ticketObj.content = ticketArea.textContent;
+    updateLocalStorage();
   });
 }
 
-function handleColor(ticket) {
+function handleColor(ticket, ticketId) {
   const ticketColorBand = ticket.querySelector(".ticket-color");
   const colors = ["pink", "green", "blue", "purple"];
   ticketColorBand.addEventListener("click", () => {
@@ -157,5 +190,45 @@ function handleColor(ticket) {
     const nextTicketColor = colors[(currentIndex + 1) % colors.length];
     ticketColorBand.classList.remove(currentColor);
     ticketColorBand.classList.add(nextTicketColor);
+    const ticketObj = allTickets.find((ticketObj) => {
+      return ticketObj.id === ticketId;
+    });
+    ticketObj.color = nextTicketColor;
+    updateLocalStorage();
   });
 }
+
+function updateLocalStorage() {
+  localStorage.setItem("kanbanboardTask", JSON.stringify(allTickets));
+}
+
+const containers = document.querySelectorAll(".container");
+let draggedElement;
+containers.forEach((container) => {
+  container.addEventListener("dragstart", (event) => {
+    console.log("dragStart : ", event);
+    draggedElement = event.target;
+  });
+  container.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    console.log("dragover : ", event);
+  });
+  container.addEventListener("drop", (event) => {
+    event.preventDefault();
+    if (draggedElement) {
+      container.appendChild(draggedElement);
+      const isPendingTask =
+        container.classList[0] === "pending-cont" ? true : false;
+      const ticketId = draggedElement.querySelector(".ticket-id").innerText;
+      const ticketObj = allTickets.find((ticketObj) => {
+        return ticketObj.id === ticketId;
+      });
+      ticketObj.isPending = isPendingTask;
+      updateLocalStorage();
+    }
+    console.log("drop : ", event);
+  });
+  container.addEventListener("dragend", (event) => {
+    console.log("dragend : ", event);
+  });
+});
