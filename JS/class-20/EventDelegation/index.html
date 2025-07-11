@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Delegation</title>
+    <style>
+      .outer {
+        margin: 20px;
+        padding: 50px;
+        background-color: lightcoral;
+      }
+
+      .middle {
+        padding: 40px;
+        background-color: lightgreen;
+      }
+
+      .inner {
+        padding: 30px;
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      outer
+      <div class="middle">
+        middle
+        <div class="inner">inner</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const outer = document.querySelector(".outer");
+    const middle = document.querySelector(".middle");
+    const inner = document.querySelector(".inner");
+
+    // capturing
+    // outer.addEventListener(
+    //   "click",
+    //   (event) => {
+    //     console.log("capturing outer has been clicked");
+    //     // it always returns the specific element on which click events happens/trigger
+    //     console.log(" outer target", event.target);
+    //     // it always returns the element on which click listner is attached
+    //     console.log("outer currenttarget", event.currentTarget);
+    //   },
+    //   true
+    // );
+    // middle.addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("capturing middle has been clicked");
+    //     // it always returns the specific element on which click events happens/trigger
+    //     console.log("middle target", event.target);
+    //     // it always returns the element on which click listner is attached
+    //     console.log("middle currenttarget", event.currentTarget);
+    //   },
+    //   true
+    // );
+    // inner.addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("capturing 1st inner has been clicked");
+    //     // event.stopPropagation(); // stops bubbling effect
+    //     // stops bubbling effect + stops events getting
+    //     // executed on same elemented
+    //   },
+    //   true
+    // );
+    // inner.addEventListener(
+    //   "click",
+    //   () => {
+    //     console.log("capturing 2nd inner has been clicked");
+    //     event.stopImmediatePropagation();
+    //   },
+    //   true
+    // );
+
+    // blubbling
+    outer.addEventListener(
+      "click",
+      (event) => {
+        console.log("blubbling outer has been clicked");
+        // it always returns the specific element on which click events happens/trigger
+        console.log(" outer target", event.target);
+        // it always returns the element on which click listner is attached
+        console.log("outer currenttarget", event.currentTarget);
+      },
+      false
+    );
+    middle.addEventListener(
+      "click",
+      () => {
+        console.log(" blubbling middle has been clicked");
+        // it always returns the specific element on which click events happens/trigger
+        console.log("middle target", event.target);
+        // it always returns the element on which click listner is attached
+        console.log("middle currenttarget", event.currentTarget);
+      },
+      false
+    );
+    inner.addEventListener(
+      "click",
+      () => {
+        console.log("blubbling 1st inner has been clicked");
+        // event.stopPropagation(); // stops bubbling effect
+        // stops bubbling effect + stops events getting
+        // executed on same elemented
+      },
+      false
+    );
+    inner.addEventListener(
+      "click",
+      () => {
+        console.log(" blubbling 2nd inner has been clicked");
+        // event.stopImmediatePropagation();
+      },
+      false
+    );
+  </script>
+</html>
