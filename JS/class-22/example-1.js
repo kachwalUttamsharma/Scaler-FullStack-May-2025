@@ -48,29 +48,50 @@ function generateBill() {
   });
   return bill;
 }
-console.log("after");
 
-getMenu(10)
-  .then((menu) => {
+async function cafeFlow() {
+  try {
+    const menu = await getMenu(9);
     console.log(menu);
-    return placeAnOrder("Tea-1", "Biscuists");
-  })
-  .then((orderStatus) => {
-    console.log(orderStatus);
-    return serve();
-  })
-  .then((orderIsBeingServer) => {
-    console.log(orderIsBeingServer);
-    console.log("consumed the items");
-    return generateBill();
-  })
-  .then((bill) => {
+    const placingTheOrder = await placeAnOrder("Tea", "Biscuists");
+    console.log(placingTheOrder);
+    const orderIsBeingServed = await serve();
+    console.log(orderIsBeingServed);
+    const bill = await generateBill();
     console.log(bill);
     console.log("Payment is done");
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    console.log("Thank you for visiting us, and keep coming");
-  });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    console.log("Thank you for visiting us and keep coming");
+  }
+}
+
+cafeFlow();
+
+console.log("after");
+
+// getMenu(10)
+//   .then((menu) => {
+//     console.log(menu);
+//     return placeAnOrder("Tea-1", "Biscuists");
+//   })
+//   .then((orderStatus) => {
+//     console.log(orderStatus);
+//     return serve();
+//   })
+//   .then((orderIsBeingServer) => {
+//     console.log(orderIsBeingServer);
+//     console.log("consumed the items");
+//     return generateBill();
+//   })
+//   .then((bill) => {
+//     console.log(bill);
+//     console.log("Payment is done");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   })
+//   .finally(() => {
+//     console.log("Thank you for visiting us, and keep coming");
+//   });

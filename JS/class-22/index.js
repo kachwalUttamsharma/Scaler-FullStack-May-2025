@@ -38,7 +38,7 @@ async function name() {
   // everything works like a synchronous way
   console.log("before"); // sync
   // blocking the thread - presumption but it is not
-  // blocking the function
+  // blocking the function execution till promise is resolved
   const value = await promise; // then === await // async
   console.log("after"); // sync
   return value;
