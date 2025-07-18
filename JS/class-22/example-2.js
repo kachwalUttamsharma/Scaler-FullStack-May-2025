@@ -56,3 +56,8 @@ async function getAllInfo() {
 getAllInfo();
 
 // parallel
+Promise.all([
+  myFetchUrls(USER_URL),
+  myFetchUrls(POST_URL),
+  myFetchUrls(COMMENT_URL),
+]);

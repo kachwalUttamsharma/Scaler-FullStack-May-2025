@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async Example</title>
+    <script src="./script.js" defer></script>
+    <style>
+      #userCard {
+        border: 1px solid black;
+        padding: 10px;
+        width: 200px;
+        height: 100px;
+        margin-top: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="fetchUserBtn">Get Random User</button>
+    <div id="userCard">
+      <p id="userName">random name</p>
+      <p id="userEmail">random email</p>
+      <p id="userCountry">random country</p>
+    </div>
+  </body>
+</html>
