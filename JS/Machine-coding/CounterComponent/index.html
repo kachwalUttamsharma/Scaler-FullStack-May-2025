@@ -1,0 +1,102 @@
+<!-- create a counter -->
+
+<!-- Requirement Gathering -->
+<!-- (MVP) 1. Counter (it shows current count- starting with 0) 
+2. Increment Button
+3. Decrement Button (while reducing count dont go to negative number instead keep it zero)
+4. Reset Button 
+5. Increment By/ Decrement By (where on
+increment or decrement button click you increase or decrease by that value) -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <style>
+      .container {
+        padding: 1rem;
+        border: 0.4px solid black;
+        border-radius: 0.6rem;
+        margin: 0.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: thistle;
+        gap: 0.7rem;
+      }
+
+      .btn {
+        padding: 0.3rem 0.5rem;
+        background-color: #4792c4;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Counter</h1>
+      <div id="number">0</div>
+      <div>
+        Increment or Decrement By
+        <input type="number" id="increment_decrement" value="1" />
+      </div>
+      <div>
+        <button id="add" class="btn">+</button>
+        <button id="subtract" class="btn" disabled>-</button>
+      </div>
+      <button id="reset" class="btn" disabled>Reset</button>
+    </div>
+  </body>
+  <script>
+    const add = document.querySelector("#add");
+    const subtract = document.querySelector("#subtract");
+    const reset = document.querySelector("#reset");
+    const counter = document.querySelector("#number");
+    const counter_increment_decrement = document.querySelector(
+      "#increment_decrement"
+    );
+
+    add.addEventListener("click", () => {
+      const currentCount = parseInt(counter.innerText);
+      const increment_decrement_value = parseInt(
+        counter_increment_decrement.value
+      );
+      const updatedCount = currentCount + increment_decrement_value;
+      counter.innerText = updatedCount;
+      if (updatedCount > 0) {
+        subtract.removeAttribute("disabled");
+        reset.removeAttribute("disabled");
+      }
+    });
+
+    subtract.addEventListener("click", (e) => {
+      console.log(e);
+      const currentCount = parseInt(counter.innerText);
+      const increment_decrement_value = parseInt(
+        counter_increment_decrement.value
+      );
+      const upatedNumber = currentCount - increment_decrement_value;
+      counter.innerText = upatedNumber > 0 ? upatedNumber : 0;
+      if (upatedNumber <= 0) {
+        subtract.setAttribute("disabled", "true");
+        reset.setAttribute("disabled", "true");
+      }
+    });
+
+    reset.addEventListener("click", () => {
+      counter.innerText = 0;
+      counter_increment_decrement.value = 1;
+      subtract.setAttribute("disabled", "true");
+      reset.setAttribute("disabled", "true");
+    });
+  </script>
+</html>
