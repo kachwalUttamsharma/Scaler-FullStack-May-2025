@@ -12,13 +12,16 @@ let saveTimeLeft = null;
 
 const TransformedInput = (hrs, mins, secs) => {
   if (secs >= 60) {
-    mins = mins + Math.floor(secs / 60);
+    //mins = mins + Math.floor(secs / 60);
+    mins++;
     secs = secs % 60;
   }
   if (mins >= 60) {
-    hrs = hrs + Math.floor(mins / 60);
+    //hrs = hrs + Math.floor(mins / 60);
+    hrs++;
     mins = mins % 60;
   }
+  console.log("inside transformed inputs", hrs, mins, secs);
   return {
     transformedhrs: hrs,
     transformedmins: mins,
@@ -70,6 +73,7 @@ const updateUI = (countDownTime) => {
     secInput.value = secs < 10 ? `0${secs}` : secs;
     minInput.value = mins < 10 || mins === 0 ? `0${mins}` : mins;
     hrInput.value = hrs < 10 || hrs === 0 ? `0${hrs}` : hrs;
+    return;
   }
   if (mins > 0) {
     mins--;
@@ -83,6 +87,7 @@ const updateUI = (countDownTime) => {
     minInput.value = 59;
     secInput.value = 59;
     hrInput.value = hrs < 10 ? `0${hrs}` : `${hrs}`;
+    return;
   }
 };
 
@@ -101,10 +106,11 @@ startBtn.addEventListener("click", () => {
     return;
   }
   const { transformedhrs, transformedmins, transformedsecs } = TransformedInput(
-    mins,
     hrs,
+    mins,
     secs
   );
+  console.log(transformedhrs, transformedmins, transformedsecs);
   const totalTimeInSeconds =
     transformedhrs * 60 * 60 + transformedmins * 60 + transformedsecs;
   timer(totalTimeInSeconds);
