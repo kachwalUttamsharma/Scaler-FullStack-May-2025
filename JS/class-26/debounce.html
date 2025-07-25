@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debounce</title>
+  </head>
+  <body>
+    <input type="text" id="input_field" />
+  </body>
+  <script>
+    function processInput() {
+      console.log("processing input...");
+    }
+
+    function debounce(func, wait) {
+      let timerFlag;
+      return () => {
+        const later = function () {
+          // added to handle memory leaks
+          clearTimeout(timerFlag);
+          timerFlag = null;
+          func();
+        };
+        clearTimeout(timerFlag);
+        timerFlag = setTimeout(later, wait);
+      };
+    }
+    const inputElem = document.getElementById("input_field");
+    const debounceInput = debounce(processInput, 500);
+    inputElem.addEventListener("keydown", debounceInput);
+  </script>
+</html>
