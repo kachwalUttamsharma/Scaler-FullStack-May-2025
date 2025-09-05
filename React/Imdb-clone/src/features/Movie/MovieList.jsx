@@ -7,7 +7,6 @@ const MovieList = ({ movies }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    // page refresh
     setWatchList(() => {
       if (localStorage.getItem("ImdbWatchListMovies")) {
         return JSON.parse(localStorage.getItem("ImdbWatchListMovies"));
@@ -41,6 +40,11 @@ const MovieList = ({ movies }) => {
   const handleOpenModal = (movie) => {
     setOpenModal(true);
     setSelectedMovie(movie);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedMovie(null);
   };
 
   return (
@@ -82,7 +86,14 @@ const MovieList = ({ movies }) => {
             );
           })}
       </div>
-      {openModal && <MovieInfo movie={selectedMovie} />}
+      {openModal && (
+        <div className="fixed inset-0 z-50 backdrop-blur-sm bg-black/50 h-screen overflow-y-auto flex justify-center items-center">
+          <MovieInfo
+            movie={selectedMovie}
+            handleCloseModal={handleCloseModal}
+          />
+        </div>
+      )}
     </>
   );
 };

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Spinner from "./Spinner";
+import Spinner from "../../components/Spinner";
 
 const Banner = () => {
   const [movies, setMovies] = useState([]);
   const [loader, setLoader] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const TMDB_API_KEY = import.meta.env.VITE_API_KEY;
+  const TMDB_TRENDING_MOVIE_BASE_URL = import.meta.env
+    .VITE_TRENDING_MOVIES_BASE_URL;
   useEffect(() => {
     try {
       setLoader(true);
-      const url =
-        "https://api.themoviedb.org/3/trending/movie/day?api_key=0fa9d94b072b5c497f3a9720acb86bc2";
+      const url = `${TMDB_TRENDING_MOVIE_BASE_URL}?api_key=${TMDB_API_KEY}`;
       axios.get(url).then((response) => {
         const movieData = response?.data?.results?.slice(0, 5);
         setMovies(

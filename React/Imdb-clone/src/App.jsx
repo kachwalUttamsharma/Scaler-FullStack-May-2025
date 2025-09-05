@@ -3,7 +3,7 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Home from "./Pages/Home";
 import WatchList from "./Pages/WatchList";
-import PageNotFound from "./components/PageNotFound";
+import PageNotFound from "./Pages/PageNotFound";
 
 function App() {
   return (

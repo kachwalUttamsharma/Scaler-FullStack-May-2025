@@ -1,18 +1,21 @@
 import axios from "axios";
-import React, { use, useEffect, useState } from "react";
-import Spinner from "./Spinner";
-import Pagination from "./Pagination";
+import React, { useEffect, useState } from "react";
+import Spinner from "../../components/Spinner";
+import Pagination from "../../components/Pagination";
 import MovieList from "./MovieList";
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
   const [loader, setLoader] = useState(false);
   const [pageNo, setPageNo] = useState(1);
+  const TMDB_API_KEY = import.meta.env.VITE_API_KEY;
+  const TMDB_TRENDING_MOVIE_BASE_URL = import.meta.env
+    .VITE_TRENDING_MOVIES_BASE_URL;
 
   useEffect(() => {
     try {
       setLoader(true);
-      const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=0fa9d94b072b5c497f3a9720acb86bc2&language=en-US&page=${pageNo}`;
+      const url = `${TMDB_TRENDING_MOVIE_BASE_URL}?api_key=${TMDB_API_KEY}&language=en-US&page=${pageNo}`;
       axios.get(url).then((response) => {
         const movieData = response?.data?.results;
         setMovies(movieData);
