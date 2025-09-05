@@ -57,13 +57,13 @@ const Banner = () => {
                 </div>
               </div>
               <button
-                className="absolute left-2 top-1/2 text-white p-2 rounded-full bg-black/50"
+                className="absolute left-2 top-1/2 text-white p-2 rounded-full bg-black/50 hover:cursor-pointer"
                 onClick={handlePrev}
               >
                 <ChevronLeft />
               </button>
               <button
-                className="absolute right-2 top-1/2 text-white p-2 rounded-full bg-black/50"
+                className="absolute right-2 top-1/2 text-white p-2 rounded-full bg-black/50 hover:cursor-pointer"
                 onClick={handleNext}
               >
                 <ChevronRight />
