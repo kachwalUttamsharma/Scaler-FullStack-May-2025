@@ -19,6 +19,7 @@ const fetchTrendingMovies = (pageNo) => {
         dispatch(movieData(data));
       });
     } catch (error) {
+      console.log(error);
       dispatch(movieError());
     } finally {
       dispatch(stopLoading());

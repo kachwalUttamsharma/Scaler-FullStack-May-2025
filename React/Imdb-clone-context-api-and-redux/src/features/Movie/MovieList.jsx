@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import MovieInfo from "./MovieInfo";
 import { MovieContext } from "../../context/MovieContextWrapper";
 

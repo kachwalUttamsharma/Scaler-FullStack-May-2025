@@ -23,13 +23,13 @@ const MovieInfo = ({ movie, handleCloseModal }) => {
           setTrailerUrl(`https://www.youtube.com/embed/${trailerObj?.key}`);
         }
       } catch (erorr) {
-        console.log(error);
+        console.log(erorr);
       } finally {
         setLoader(false);
       }
     };
     fetchTrailer();
-  }, []);
+  }, [TMDB_API_KEY]);
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-[35vw] max-h-[90vh] ">
       {loader ? (

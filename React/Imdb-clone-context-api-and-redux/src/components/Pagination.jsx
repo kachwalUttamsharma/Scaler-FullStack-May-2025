@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Pagination = ({ pageNo, handlePrev, handleNext }) => {
@@ -7,6 +7,7 @@ const Pagination = ({ pageNo, handlePrev, handleNext }) => {
       <button
         className=" text-white p-2 rounded-full bg-black/50"
         onClick={handlePrev}
+        aria-label="Previous Page"
       >
         <ChevronLeft />
       </button>
@@ -14,6 +15,7 @@ const Pagination = ({ pageNo, handlePrev, handleNext }) => {
       <button
         className=" text-white p-2 rounded-full bg-black/50"
         onClick={handleNext}
+        aria-label="Next Page"
       >
         <ChevronRight />
       </button>
