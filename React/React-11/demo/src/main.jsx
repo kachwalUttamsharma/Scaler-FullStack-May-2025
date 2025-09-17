@@ -3,12 +3,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import App from "./App";
+import App3 from "./App3";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </StrictMode>
+  <Router>
+    <App3 />
+  </Router>
 );
