@@ -1,8 +1,26 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginUser } from "../api/user";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      const response = await LoginUser(values);
+      console.log(response);
+      if (response?.success) {
+        message.success(response?.message);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      } else {
+        message.warning(response?.message);
+      }
+    } catch (error) {
+      message.error(error);
+    }
+  };
   return (
     <header className="App-header">
       <main className="mw-500 text-center px-3">
@@ -10,7 +28,7 @@ const Login = () => {
           <h1>Login to BookMyShow</h1>
         </section>
         <section>
-          <Form layout="vertical">
+          <Form layout="vertical" onFinish={onFinish}>
             <Form.Item
               label="Email"
               name="email"
@@ -21,7 +39,7 @@ const Login = () => {
             </Form.Item>
             <Form.Item
               label="Password"
-              name="email"
+              name="password"
               htmlFor="password"
               rules={[{ required: true, message: "Password is required" }]}
             >

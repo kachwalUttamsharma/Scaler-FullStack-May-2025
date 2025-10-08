@@ -4,12 +4,14 @@ const registerUser = async (req, res) => {
   try {
     // check if user already exists
     const userExists = await userModel.findOne({ email: req?.body?.email });
-    if (!userExists) {
+    if (userExists) {
       return res.send({
         success: false,
         message: "User Already Exists",
       });
     }
+
+    // how we can encrypt a password will pick it update security
     const newUser = new userModel(req?.body);
     await newUser.save();
 
