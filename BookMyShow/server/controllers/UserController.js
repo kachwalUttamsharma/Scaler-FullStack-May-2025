@@ -49,6 +49,7 @@ const loginUser = async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    // res.cookie("Access_token", token, { maxAge: "1d" });
     res.send({
       success: true,
       message: "You've successfully Logged In",
