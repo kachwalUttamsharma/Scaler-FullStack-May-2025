@@ -1,4 +1,5 @@
 const userModel = require("../models/userSchema");
+const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
   try {
@@ -42,9 +43,16 @@ const loginUser = async (req, res) => {
       });
     }
 
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.SECRET_KEY,
+      { expiresIn: "1d" }
+    );
+
     res.send({
       success: true,
       message: "You've successfully Logged In",
+      data: token,
     });
   } catch (error) {
     console.log(error);
@@ -52,7 +60,21 @@ const loginUser = async (req, res) => {
   }
 };
 
+const currentUser = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.body.userId);
+    res.send({
+      success: true,
+      message: "User Details Fetched Successfully",
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  currentUser,
 };

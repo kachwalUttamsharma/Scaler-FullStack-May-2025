@@ -25,4 +25,19 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.pre("save", function (next) {
+  const now = new Date();
+  this.updatedAt = now;
+  if (!this.createAt) {
+    this.createAt = now;
+  }
+  console.log("from pre hook", now, this);
+  next();
+});
+
+userSchema.post("save", function (doc, next) {
+  console.log(`User ${doc.name} has been saved`);
+  next();
+});
+
 module.exports = mongoose.model("users", userSchema);
