@@ -12,6 +12,7 @@ const Login = () => {
       if (response?.success) {
         message.success(response?.message);
         setTimeout(() => {
+          localStorage.setItem("tokenForBMS", response?.data);
           navigate("/");
         }, 1000);
       } else {

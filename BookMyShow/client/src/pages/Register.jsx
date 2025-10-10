@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message, Radio } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterUser } from "../api/user";
 
@@ -53,6 +53,25 @@ const Register = () => {
               rules={[{ required: true, message: "Password is required" }]}
             >
               <Input type="password" placeholder="Enter your Password" />
+            </Form.Item>
+            <Form.Item
+              label="Register as a Partner"
+              htmlFor="role"
+              name="role"
+              initialValue={false}
+              rules={[{ required: true, message: "Please select an option" }]}
+            >
+              <div className="d-flex justify-content-start">
+                <Radio.Group
+                  name="role"
+                  defaultValue={false}
+                  className="flex-start"
+                  options={[
+                    { value: "partner", label: "Yes" },
+                    { value: "user", label: "No" },
+                  ]}
+                />
+              </div>
             </Form.Item>
             <Form.Item>
               <Button
