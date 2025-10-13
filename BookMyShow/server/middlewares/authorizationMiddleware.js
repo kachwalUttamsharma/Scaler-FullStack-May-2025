@@ -8,6 +8,7 @@ const validateJWTToken = (req, res, next) => {
       req.body = {
         email: decode?.email,
         userId: decode?.userId,
+        ...req?.body,
       };
       next();
     } else {
