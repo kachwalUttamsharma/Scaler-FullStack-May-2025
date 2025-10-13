@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -59,6 +65,10 @@
 
 .d-block {
   display: block;
+}
+
+.d-flex {
+  display: "flex";
 }
 
 input,
