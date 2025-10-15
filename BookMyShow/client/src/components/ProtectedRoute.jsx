@@ -10,6 +10,7 @@ import {
   HomeOutlined,
   LogoutOutlined,
   ProfileOutlined,
+  BookOutlined,
 } from "@ant-design/icons";
 
 const ProtectedRoute = ({ children }) => {
@@ -47,17 +48,32 @@ const ProtectedRoute = ({ children }) => {
       icon: <HomeOutlined />,
     },
     {
+      key: "roleProfiler",
+      label: (
+        <span
+          onClick={() => {
+            if (user.role === "admin") {
+              navigate("/admin", { replace: true });
+            } else if (user.role === "partner") {
+              navigate("/partner", { replace: true });
+            } else {
+              navigate("/myBookings", { replace: true });
+            }
+          }}
+        >
+          {user?.role === "admin" && "Movie Management"}
+          {user?.role === "partner" && "Theatre Management"}
+          {user?.role === "user" && "My Bookings"}
+        </span>
+      ),
+      icon: <BookOutlined />,
+    },
+    {
       key: "Profile",
       label: (
         <span
           onClick={() => {
-            if (user?.role === "admin") {
-              navigate("/admin");
-            } else if (user?.role === "partner") {
-              navigate("/partner");
-            } else {
-              navigate("/profile");
-            }
+            navigate("/profile");
           }}
         >
           My Profile
@@ -105,7 +121,7 @@ const ProtectedRoute = ({ children }) => {
             textAlign: "center",
             backgroundColor: "#001529",
             color: "white",
-            position: "absolute",
+            position: "fixed",
             bottom: 0,
             width: "100%",
           }}
