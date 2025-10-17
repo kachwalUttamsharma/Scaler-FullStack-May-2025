@@ -27,8 +27,12 @@ export const updateMovie = async (values) => {
   }
 };
 
-export const deleteMovie = async () => {
+export const deleteMovie = async (movieId) => {
   try {
+    const response = await axiosInstance.delete(
+      `/movies/deleteMovie/${movieId}`
+    );
+    return response?.data;
   } catch (error) {
     return error;
   }
