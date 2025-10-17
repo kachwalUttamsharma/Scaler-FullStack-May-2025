@@ -47,7 +47,8 @@ const updateMovie = async (req, res, next) => {
 };
 const deleteMovie = async (req, res, next) => {
   try {
-    const movie = await movieModel.findByIdAndDelete(req?.body?.movieId);
+    const movieId = req.params.movieId;
+    const movie = await movieModel.findByIdAndDelete(movieId);
     if (!movie) {
       res.status(404).json({ message: "Movie not found" });
     }

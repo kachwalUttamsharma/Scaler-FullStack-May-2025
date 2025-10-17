@@ -4,20 +4,14 @@ import TextArea from "antd/es/input/TextArea";
 import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/loaderSlice";
 import { addMovie, updateMovie } from "../../api/movie";
-import moment from "moment";
 
 const MovieForm = ({
   isModalOpen,
   setIsModalOpen,
-  FetchMovieData,
+  fetchMovieData,
   selectedMovie,
   setSelectedMovie,
 }) => {
-  //   if (selectedMovie) {
-  //     selectedMovie.releaseDate = moment(selectedMovie.releaseDate).format(
-  //       "YYYY-MM-DD"
-  //     );
-  //   }
   const dispatch = useDispatch();
 
   const handleCancel = () => {
@@ -43,7 +37,7 @@ const MovieForm = ({
       message.error(error);
     } finally {
       dispatch(hideLoading());
-      FetchMovieData();
+      fetchMovieData();
       setIsModalOpen(false);
       setSelectedMovie(null);
     }

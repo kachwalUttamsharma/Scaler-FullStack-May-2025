@@ -6,11 +6,13 @@ import { getAllMovies } from "../../api/movie";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import MovieForm from "./MovieForm";
 import moment from "moment";
+import DeleteMovieModal from "./DeleteMovieModal";
 
 const MovieTable = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const dispatch = useDispatch();
   const getData = async () => {
     try {
@@ -79,7 +81,7 @@ const MovieTable = () => {
     },
     {
       key: "releaseDate",
-      title: "Release Date",
+      title: "Release Date (MM-DD-YYYY)",
       dataIndex: "releaseDate",
       render: (text, data) => {
         return moment(text).format("MM-DD-YYYY");
@@ -95,12 +97,22 @@ const MovieTable = () => {
               style={{ margin: "5px" }}
               onClick={() => {
                 setIsModalOpen(true);
+                data.releaseDate = moment(data.releaseDate).format(
+                  "YYYY-MM-DD"
+                );
                 setSelectedMovie(data);
               }}
             >
               <EditOutlined />
             </Button>
-            <Button style={{ margin: "5px" }}>
+            <Button
+              danger
+              style={{ margin: "5px" }}
+              onClick={() => {
+                setSelectedMovie(data);
+                setIsDeleteModalOpen(true);
+              }}
+            >
               <DeleteOutlined />
             </Button>
           </div>
@@ -115,6 +127,7 @@ const MovieTable = () => {
           onClick={() => {
             setIsModalOpen(!isModalOpen);
           }}
+          type="primary"
         >
           Add Movie
         </Button>
@@ -124,9 +137,18 @@ const MovieTable = () => {
         <MovieForm
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          FetchMovieData={getData}
+          fetchMovieData={getData}
           selectedMovie={selectedMovie}
           setSelectedMovie={setSelectedMovie}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteMovieModal
+          isDeleteModalOpen={isDeleteModalOpen}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          selectedMovie={selectedMovie}
+          setSelectedMovie={setSelectedMovie}
+          fetchMovieData={getData}
         />
       )}
     </>
