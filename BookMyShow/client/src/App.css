@@ -337,6 +337,55 @@ hr {
   width: 100%;
 }
 
+/* Profile comp */
+.profile-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 400px;
+  margin-inline: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #1890ff;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #212121;
+}
+
+.profile-email {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.profile-role {
+  display: inline-block;
+  background-color: #e6f4ff;
+  color: #1890ff;
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.profile-id {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 1rem;
+  word-break: break-all;
+}
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);

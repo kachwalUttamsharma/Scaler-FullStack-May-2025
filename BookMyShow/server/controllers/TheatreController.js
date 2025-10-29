@@ -16,7 +16,7 @@ const addThreatre = async (req, res, next) => {
 const updateTheatre = async (req, res, next) => {
   try {
     const Theatre = await TheatreModel.findByIdAndUpdate(
-      req?.body?.theatreId,
+      req?.body?._id,
       req.body,
       {
         new: true,
@@ -25,6 +25,7 @@ const updateTheatre = async (req, res, next) => {
     res.send({
       success: true,
       message: "Theatre has been updated!",
+      data: Theatre,
     });
   } catch (err) {
     res.status(400);
@@ -62,9 +63,24 @@ const getAllTheatres = async (req, res, next) => {
   }
 };
 
+const getAllTheatresByOwner = async (req, res, next) => {
+  try {
+    const allTheatres = await TheatreModel.find({ owner: req?.body?.userId });
+    res.send({
+      success: true,
+      message: "All Theatres Fetched !",
+      data: allTheatres,
+    });
+  } catch (err) {
+    res.status(400);
+    next(err);
+  }
+};
+
 module.exports = {
   addThreatre,
   updateTheatre,
   deleteTheatre,
   getAllTheatres,
+  getAllTheatresByOwner,
 };
