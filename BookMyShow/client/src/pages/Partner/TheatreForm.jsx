@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Modal, Row, Form, Input, Button, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/loaderSlice";
 import { addTheatre, updateTheatre } from "../../api/theatre";
 
@@ -13,6 +13,7 @@ const TheatreForm = ({
   fetchTheatreData,
 }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const handleCancel = () => {
     setIsModalOpen(false);
     setSelectedTheatre(null);
@@ -27,7 +28,7 @@ const TheatreForm = ({
           theatreId: selectedTheatre._id,
         });
       } else {
-        response = await addTheatre(values);
+        response = await addTheatre({ ...values, owner: user._id });
       }
       if (response?.success === true) {
         message.success(response?.message);

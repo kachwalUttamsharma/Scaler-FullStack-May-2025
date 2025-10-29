@@ -1,7 +1,7 @@
 import { Button, message, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAlltheatres } from "../../api/theatre";
+import { getAlltheatresByOwner } from "../../api/theatre";
 import { hideLoading, showLoading } from "../../redux/loaderSlice";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import TheatreForm from "./TheatreForm";
@@ -16,7 +16,7 @@ const TheatreList = () => {
   const getData = async () => {
     try {
       dispatch(showLoading());
-      const response = await getAlltheatres();
+      const response = await getAlltheatresByOwner();
       if (response?.success === true) {
         setTheatres(response?.data);
       } else {
@@ -89,6 +89,16 @@ const TheatreList = () => {
             >
               <DeleteOutlined />
             </Button>
+            {data.isActive && (
+              <Button
+                style={{ margin: "5px" }}
+                onClick={() => {
+                  setSelectedTheatre(data);
+                }}
+              >
+                + Shows
+              </Button>
+            )}
           </div>
         );
       },
