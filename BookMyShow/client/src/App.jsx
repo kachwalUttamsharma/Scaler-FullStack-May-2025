@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin/Admin";
 import Partner from "./pages/Partner/Partner";
+import SingleMovie from "./pages/SingleMovie";
 
 const App = () => (
   <div className="App">
@@ -42,6 +43,14 @@ const App = () => (
           element={
             <ProtectedRoute>
               <Partner />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/movie/:id"
+          element={
+            <ProtectedRoute>
+              <SingleMovie />
             </ProtectedRoute>
           }
         />
