@@ -60,6 +60,25 @@ const getAllShowsByTheatre = async (req, res, next) => {
 
 const getAllShowsByMovie = async (req, res, next) => {
   try {
+    const { movie, date } = req.body;
+    const shows = await ShowModel.find({ movie, date }).populate("theatre");
+    const theatreMap = new Map();
+    shows.forEach((show) => {
+      const theatreId = show.theatre._id.toString();
+      if (!theatreMap.has(theatreId)) {
+        theatreMap.set(theatreId, {
+          ...show.theatre._doc,
+          shows: [],
+        });
+      }
+      theatreMap.get(theatreId).shows.push(show);
+    });
+    const uniqueTheatre = Array.from(theatreMap.values());
+    res.send({
+      success: true,
+      message: "All theatres fetched successfully",
+      data: uniqueTheatre,
+    });
   } catch (error) {
     res.status(400);
     next(error);
