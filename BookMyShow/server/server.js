@@ -5,6 +5,7 @@ const userRoute = require("./routes/userRoute");
 const movieRoute = require("./routes/movieRoute");
 const theatreRoute = require("./routes/theatreRoute");
 const showRoute = require("./routes/showRoute");
+const bookingRoute = require("./routes/bookingRoute");
 const errorHandler = require("./middlewares/errorHandler");
 const { validateJWTToken } = require("./middlewares/authorizationMiddleware");
 
@@ -16,6 +17,7 @@ app.use("/bms/v1/users", userRoute);
 app.use("/bms/v1/movies", validateJWTToken, movieRoute);
 app.use("/bms/v1/theatres", validateJWTToken, theatreRoute);
 app.use("/bms/v1/shows", validateJWTToken, showRoute);
+app.use("/bms/v1/bookings", validateJWTToken, bookingRoute);
 
 app.use(errorHandler);
 app.listen(process.env.PORT, () => {

@@ -51,3 +51,14 @@ export const getAllTheatresByMovie = async (payload) => {
     return err.response;
   }
 };
+
+export const getShowById = async (payload) => {
+  try {
+    const response = await axiosInstance.get(
+      `shows/getShowById/${payload.showId}`
+    );
+    return response.data;
+  } catch (err) {
+    return err.message;
+  }
+};

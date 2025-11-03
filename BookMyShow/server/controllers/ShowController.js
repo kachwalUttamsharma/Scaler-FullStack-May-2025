@@ -85,8 +85,16 @@ const getAllShowsByMovie = async (req, res, next) => {
   }
 };
 
-const getAllShowsById = async (req, res, next) => {
+const getShowById = async (req, res, next) => {
   try {
+    const shows = await ShowModel.findById(req.params.showId)
+      .populate("movie")
+      .populate("theatre");
+    res.send({
+      success: true,
+      message: "All shows are fetched",
+      data: shows,
+    });
   } catch (error) {
     res.status(400);
     next(error);
@@ -97,7 +105,7 @@ module.exports = {
   addShow,
   deleteShow,
   updateShow,
-  getAllShowsById,
+  getShowById,
   getAllShowsByMovie,
   getAllShowsByTheatre,
 };

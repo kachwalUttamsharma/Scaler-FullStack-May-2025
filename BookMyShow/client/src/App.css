@@ -216,7 +216,8 @@ hr {
 
 .movie-title-details * {
   margin-bottom: 6px;
-  margin-top: 0;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 
 .show-name * {
@@ -245,6 +246,7 @@ hr {
   gap: 0.5rem;
   flex-wrap: wrap;
   max-width: 600px;
+  justify-content: center;
 }
 
 .seat-ul .seat-btn {
@@ -277,7 +279,7 @@ hr {
 }
 
 .screen-div {
-  max-width: 75%;
+  max-width: 100%;
   margin-inline: auto;
   height: 10px;
   background-color: #eee;
