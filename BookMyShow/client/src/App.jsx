@@ -11,6 +11,8 @@ import Partner from "./pages/Partner/Partner";
 import SingleMovie from "./pages/SingleMovie";
 import BookingShow from "./pages/BookingShow";
 import MyBookings from "./pages/MyBookings";
+import Forget from "./pages/Forget";
+import Reset from "./pages/Reset";
 
 const App = () => (
   <div className="App">
@@ -74,6 +76,8 @@ const App = () => (
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forget" element={<Forget />} />
+        <Route path="/reset" element={<Reset />} />
       </Routes>
     </BrowserRouter>
   </div>

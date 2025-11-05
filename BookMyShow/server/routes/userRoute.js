@@ -3,6 +3,8 @@ const {
   registerUser,
   loginUser,
   currentUser,
+  forgetPassword,
+  resetPassword,
 } = require("../controllers/UserController");
 const router = express.Router();
 const { validateJWTToken } = require("../middlewares/authorizationMiddleware");
@@ -13,6 +15,8 @@ router.post("/login", loginUser);
 // protected api
 // here validate whether user is logged in ?
 router.get("/getCurrentUser", validateJWTToken, currentUser);
+router.post("/forgetPassword", forgetPassword);
+router.post("/resetPassword", resetPassword);
 
 module.exports = router;
 
