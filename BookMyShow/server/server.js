@@ -19,6 +19,8 @@ app.use("/bms/v1/shows", validateJWTToken, showRoute);
 app.use("/bms/v1/bookings", validateJWTToken, bookingRoute);
 
 app.use(errorHandler);
+
+connectDB();
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on ${process.env.PORT}`);
 });
