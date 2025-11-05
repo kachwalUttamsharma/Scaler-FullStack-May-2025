@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const connectDB = require("./config/db");
 const userRoute = require("./routes/userRoute");
 const movieRoute = require("./routes/movieRoute");
@@ -8,8 +9,6 @@ const showRoute = require("./routes/showRoute");
 const bookingRoute = require("./routes/bookingRoute");
 const errorHandler = require("./middlewares/errorHandler");
 const { validateJWTToken } = require("./middlewares/authorizationMiddleware");
-
-require("dotenv").config();
 
 connectDB();
 app.use(express.json());

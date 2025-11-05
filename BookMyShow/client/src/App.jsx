@@ -10,6 +10,7 @@ import Admin from "./pages/Admin/Admin";
 import Partner from "./pages/Partner/Partner";
 import SingleMovie from "./pages/SingleMovie";
 import BookingShow from "./pages/BookingShow";
+import MyBookings from "./pages/MyBookings";
 
 const App = () => (
   <div className="App">
@@ -60,6 +61,14 @@ const App = () => (
           element={
             <ProtectedRoute>
               <BookingShow />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/myBookings"
+          element={
+            <ProtectedRoute>
+              <MyBookings />
             </ProtectedRoute>
           }
         />

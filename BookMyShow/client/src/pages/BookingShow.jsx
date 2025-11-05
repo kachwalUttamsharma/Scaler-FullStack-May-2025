@@ -1,13 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { hideLoading, showLoading } from "../redux/loaderSlice";
 import { Col, message, Row, Card, Button } from "antd";
 import { useState } from "react";
 import { getShowById } from "../api/show";
 import moment from "moment";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { bookShow, makePayment } from "../api/booking";
 
 const BookingShow = () => {
   const params = useParams();
@@ -17,8 +18,32 @@ const BookingShow = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
-  const handlePayout = async () => {
+  const book = async (transactionId) => {
+    try {
+      dispatch(showLoading());
+      const response = await bookShow({
+        show: params.id,
+        transactionId,
+        seats: selectedSeats,
+        user: user._id,
+      });
+      if (response.success) {
+        message.success("Show booked successfully!");
+        navigate("/myBookings");
+      } else {
+        message.warning(response.message);
+      }
+    } catch (error) {
+      message.error(error);
+    } finally {
+      dispatch(hideLoading());
+    }
+  };
+
+  const handlePayment = async () => {
     if (!stripe || !elements) {
       message.warning("Stripe not loaded yet. Please wait.");
       return;
@@ -28,11 +53,34 @@ const BookingShow = () => {
       return;
     }
     try {
+      dispatch(showLoading());
       const payload = {
         amount: selectedSeats.length * show.ticketPrice * 100, // in paise
         description: `${show.movie.movieName} - ${selectedSeats.length} tickets at ${show.theatre.name}`,
       };
-      // makePayment
+      const response = await makePayment(payload);
+
+      if (response.success) {
+        const clientSecret = response.data.clientSecret;
+
+        // confirm card payment
+        const { paymentIntent, error } = await stripe.confirmCardPayment(
+          clientSecret,
+          {
+            payment_method: {
+              card: elements.getElement(CardElement),
+              billing_details: { name: user.name, email: user.email },
+            },
+          }
+        );
+        if (error) {
+          message.error(error.message);
+        } else if (paymentIntent.status === "succeeded") {
+          // booking a ticket
+          await book(paymentIntent.id);
+          message.success("Payment Successfull");
+        }
+      }
       setIsProcessing(true);
       dispatch(showLoading());
     } catch (err) {
@@ -178,7 +226,7 @@ const BookingShow = () => {
                     shape="round"
                     size="large"
                     block
-                    onClick={handlePayout}
+                    onClick={handlePayment}
                     disabled={isProcessing}
                     style={{ marginTop: "20px" }}
                   >
