@@ -1,5 +1,7 @@
 const userModel = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const emailHelper = require("../utils/emailHelper");
 
 const registerUser = async (req, res) => {
   try {
@@ -13,6 +15,9 @@ const registerUser = async (req, res) => {
     }
 
     // how we can encrypt a password will pick it update security
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req?.body?.password, salt);
+    req.body.password = hashedPassword;
     const newUser = new userModel(req?.body);
     await newUser.save();
 
@@ -36,7 +41,12 @@ const loginUser = async (req, res) => {
       });
     }
 
-    if (req?.body?.password !== user?.password) {
+    const validatePassword = await bcrypt.compare(
+      req?.body?.password,
+      user?.password
+    );
+
+    if (!validatePassword) {
       return res.send({
         success: false,
         message: "please enter valid password",
@@ -101,6 +111,10 @@ const forgetPassword = async (req, res, next) => {
     user.otpExpiry = Date.now() + 10 * 60 * 1000;
     await user.save();
     // integrate email server //smtp protocol
+    await emailHelper("otp.html", user.email, {
+      name: user.name,
+      otp,
+    });
     res.send({
       success: true,
       message: "Otp has been sent",
@@ -135,9 +149,11 @@ const resetPassword = async (req, res) => {
         message: "otp expired",
       });
     }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
     user.otp = null;
     user.otpExpiry = null;
-    user.password = password;
+    user.password = hashedPassword;
     await user.save();
     res.send({
       success: true,

@@ -2,6 +2,8 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const Booking = require("../models/bookingSchema");
 const User = require("../models/userSchema");
 const Show = require("../models/showSchema");
+const emailHelper = require("../utils/emailHelper");
+const { model } = require("mongoose");
 
 const makePayment = async (req, res) => {
   try {
@@ -94,6 +96,42 @@ const bookShow = async (req, res, next) => {
     await Show.findByIdAndUpdate(req.body.show, {
       bookedSeats: updatedBookedSeats,
     });
+
+    // metaDataEmail
+    const populatedBooking = await Booking.findById(newBooking._id)
+      .populate({
+        path: "user",
+        select: "-password",
+      })
+      .populate({
+        path: "show",
+        populate: {
+          path: "theatre",
+          model: "theatres",
+        },
+      })
+      .populate({
+        path: "show",
+        populate: {
+          path: "movie",
+          model: "movies",
+        },
+      });
+    const metaData = {
+      name: populatedBooking.user.name,
+      movie: populatedBooking.show.movie.movieName,
+      theatre: populatedBooking.show.theatre.name,
+      date: populatedBooking.show.date,
+      time: populatedBooking.show.time,
+      seats: populatedBooking.seats,
+      amount: populatedBooking.seats.length * populatedBooking.show.ticketPrice,
+      transactionId: populatedBooking.transactionId,
+    };
+    await emailHelper(
+      "ticketTemplate.html",
+      populatedBooking.user.email,
+      metaData
+    );
     res.send({
       success: true,
       message: "Payment Successfull",

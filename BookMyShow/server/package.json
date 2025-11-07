@@ -3,11 +3,15 @@
     "start": "nodemon server.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.0",
+    "nodemailer": "^7.0.10",
     "nodemon": "^3.1.10",
     "stripe": "^19.2.0"
   }
